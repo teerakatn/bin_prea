@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special One ❤️</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="ใบขอยื่นเป็นแฟน - ส่งความรักให้คนพิเศษของคุณ จากรังสรรค์ ถึง ชรินรัตน 💖">
+    <meta name="keywords" content="ใบขอยื่นเป็นแฟน, การ์ดรัก, Valentine, ความรัก, love card">
+    <meta name="author" content="รังสรรค์ บุญปัญ">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://Beam_Fresh.com/card.html">
+    <meta property="og:title" content="ใบขอยื่นเป็นแฟน 💖">
+    <meta property="og:description" content="ส่งความรักให้คนพิเศษของคุณ จากรังสรรค์ ถึง ชรินรัตน - ขอยื่นใบเลื่อนขั้นเป็นแฟน 💕">
+    <meta property="og:image" content="https://Beam_Fresh.com/images/beam01.png">
+    <meta property="og:locale" content="th_TH">
+    <meta property="og:site_name" content="For My Special One">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://Beam_Fresh.com/card.html">
+    <meta name="twitter:title" content="ใบขอยื่นเป็นแฟน 💖">
+    <meta name="twitter:description" content="ส่งความรักให้คนพิเศษของคุณ จากรังสรรค์ ถึง ชรินรัตน 💕">
+    <meta name="twitter:image" content="https://Beam_Fresh.com/images/beam01.png">
+    
+    <!-- LINE -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Theme Color (สีแถบ browser บนมือถือ) -->
+    <meta name="theme-color" content="#e3f2fd">
+    <meta name="msapplication-TileColor" content="#e3f2fd">
+    
+    <!-- Apple Touch Icon (สำหรับ iOS) -->
+    <link rel="apple-touch-icon" href="images/bin01.jpg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e3f2fd; /* สีพื้นหลังฟ้าอ่อน */
+            padding: 20px;
+        }
+
+        /* หัวใจลอยพื้นหลัง */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 6s ease-in infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ซองจดหมาย */
+        .envelope-container {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease;
+        }
+
+        .envelope {
+            position: relative;
+            width: 500px;
+            max-width: 95vw;
+        }
+
+        /* ตัวซองด้านล่าง */
+        .envelope-back {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(180deg, #81d4fa 0%, #4fc3f7 100%);
+            border-radius: 0 0 20px 20px;
+            z-index: -1;
+        }
+
+
+        /* กระดาษจดหมาย */
+        .letter {
+            background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 100%);
+            border-radius: 15px;
+            padding: 30px;
+            padding-top: 80px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 3px solid #81d4fa;
+        }
+
+        /* รูปโพลารอยด์มุมซ้ายบน */
+        .polaroid {
+            position: absolute;
+            top: -30px;
+            left: -20px;
+            background: white;
+            padding: 8px;
+            padding-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: rotate(-12deg);
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .polaroid img {
+            width: 120px;
+            height: auto;
+            max-height: 160px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* QR Code */
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border: 3px solid #81d4fa;
+            border-radius: 10px;
+            padding: 5px;
+            background: white;
+        }
+
+        /* หัวข้อ */
+        .title {
+            text-align: center;
+            color: #1976d2;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* เนื้อหาจดหมาย */
+        .content {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 20px;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        /* หมีน่ารัก */
+        .bears {
+            position: absolute;
+            bottom: -60px;
+            right: -20px;
+            z-index: 5;
+        }
+
+        .bears img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            animation: bounce 2s infinite 0.3s;
+        }
+
+        .bear-left {
+            animation: bounce 2s infinite;
+        }
+
+        .bear-right {
+            animation: bounce 2s infinite 0.3s;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Confetti Styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            top: -20px;
+            width: 12px;
+            height: 12px;
+            animation: confetti-fall linear forwards;
+        }
+
+        .confetti.circle {
+            border-radius: 50%;
+        }
+
+        .confetti.square {
+            border-radius: 2px;
+        }
+
+        .confetti.triangle {
+            width: 0;
+            height: 0;
+            background: transparent !important;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 12px solid #ff6b6b;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Image Slider */
+        .image-slider {
+            position: relative;
+            width: 100%;
+            max-width: 280px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(25, 118, 210, 0.3);
+            border: 3px solid #81d4fa;
+            background: white;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: row;
+            transition: transform 0.8s ease-in-out;
+            align-items: center;
+        }
+
+        .slider-image {
+            min-width: 100%;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #90caf9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #1976d2;
+            transform: scale(1.2);
+        }
+
+        /* Music Button */
+        #musicBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            animation: pulse-music 2s infinite;
+        }
+
+        #musicBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.5);
+        }
+
+        @keyframes pulse-music {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive */
+        @media (max-width: 550px) {
+            .envelope {
+                width: 100%;
+            }
+            .polaroid img {
+                width: 90px;
+                height: auto;
+            }
+            .title {
+                font-size: 1.1rem;
+            }
+            .content {
+                font-size: 0.9rem;
+            }
+            .bears {
+                right: -10px;
+            }
+            .bears img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* iPhone 13 Pro Max (428px) */
+        @media (max-width: 430px) {
+            body {
+                padding: 15px;
+            }
+            .envelope {
+                width: 100%;
+                max-width: 400px;
+            }
+            .letter {
+                padding: 20px;
+                padding-top: 120px; /* เพิ่ม padding เพื่อไม่ให้รูปซ้อนข้อความ */
+            }
+            .polaroid {
+                top: -25px;
+                left: -10px;
+            }
+            .polaroid img {
+                width: 85px;
+                max-height: 120px;
+            }
+            .qr-code img {
+                width: 100px;
+                max-height: 130px;
+            }
+            .title {
+                font-size: 1.1rem;
+                margin-top: 10px; /* เพิ่มระยะห่างด้านบน */
+            }
+            .content {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+            .content p {
+                margin-bottom: 12px;
+            }
+            .envelope-back {
+                bottom: -50px;
+                height: 120px;
+            }
+            .bears {
+                bottom: -50px;
+                right: -10px;
+            }
+            .bears img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        /* iPhone 13 (390px) */
+        @media (max-width: 395px) {
+            body {
+                padding: 10px;
+            }
+            .envelope {
+                max-width: 370px;
+            }
+            .letter {
+                padding: 15px;
+                padding-top: 115px; /* เพิ่ม padding เพื่อไม่ให้รูปซ้อนข้อความ */
+            }
+            .polaroid {
+                top: -20px;
+                left: -8px;
+                padding: 5px;
+                padding-bottom: 18px;
+            }
+            .polaroid img {
+                width: 75px;
+                max-height: 100px;
+            }
+            .qr-code img {
+                width: 90px;
+                max-height: 110px;
+            }
+            .title {
+                font-size: 1rem;
+                margin-top: 10px; /* เพิ่มระยะห่างด้านบน */
+                margin-bottom: 15px;
+            }
+            .content {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+            .envelope-back {
+                bottom: -45px;
+                height: 100px;
+            }
+            .bears {
+                bottom: -45px;
+                right: -5px;
+            }
+            .bears img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* iPad Gen 9 (810px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                padding: 40px;
+            }
+            .envelope {
+                width: 600px;
+                max-width: 90vw;
+            }
+            .letter {
+                padding: 40px;
+                padding-top: 100px;
+            }
+            .polaroid {
+                top: -35px;
+                left: -25px;
+            }
+            .polaroid img {
+                width: 140px;
+                max-height: 180px;
+            }
+            .title {
+                font-size: 1.8rem;
+            }
+            .content {
+                font-size: 1.1rem;
+                line-height: 2;
+            }
+            .image-slider {
+                max-width: 350px;
+            }
+            .envelope-back {
+                bottom: -70px;
+                height: 170px;
+            }
+            .bears {
+                bottom: -70px;
+                right: -25px;
+            }
+            .bears img {
+                width: 100px;
+                height: 100px;
+            }
+            #musicBtn {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+        }
+
+        /* iPhone XS Max & iPhone 11 (414px) */
+        @media (min-width: 410px) and (max-width: 420px) {
+            body {
+                padding: 15px;
+            }
+            .envelope {
+                width: 100%;
+                max-width: 395px;
+            }
+            .letter {
+                padding: 22px;
+                padding-top: 115px;
+            }
+            .polaroid {
+                top: -25px;
+                left: -12px;
+            }
+            .polaroid img {
+                width: 90px;
+                max-height: 125px;
+            }
+            .title {
+                font-size: 1.15rem;
+                margin-top: 8px;
+            }
+            .content {
+                font-size: 0.92rem;
+                line-height: 1.75;
+            }
+            .content p {
+                margin-bottom: 13px;
+            }
+            .image-slider {
+                max-width: 260px;
+            }
+            .envelope-back {
+                bottom: -55px;
+                height: 125px;
+            }
+            .bears {
+                bottom: -55px;
+                right: -12px;
+            }
+            .bears img {
+                width: 75px;
+                height: 75px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- หัวใจลอยพื้นหลัง -->
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <div class="envelope-container">
+        <div class="envelope">
+           
+            
+            <!-- กระดาษจดหมาย -->
+            <div class="letter">
+                <!-- รูปโพลารอยด์ -->
+                <div class="polaroid">
+                    <img src="images/bin12.jpg" alt="Our Photo">
+                </div>
+
+                <!-- หัวข้อ -->
+                <h1 class="title">Happy Valentine's Day 💖</h1>
+
+                <!-- เนื้อหา -->
+                <div class="content">
+                    <!-- Image Slider -->
+                    <div class="image-slider">
+                        <div class="slider-container" id="sliderContainer">
+                            <img src="images/bin01.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin02.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin02.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin03.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin04.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin05.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin06.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin07.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin08.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin09.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin10.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin11.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin12.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin13.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin14.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin15.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin16.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin17.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin18.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin19.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin20.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin21.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin22.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin23.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin24.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin25.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin26.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin27.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin28.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin29.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin30.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin31.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin32.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin33.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin34.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin35.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin36.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin37.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin38.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/sea03.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin39.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin40.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin41.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin43.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin44.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin45.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin46.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin47.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin48.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin49.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin50.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin51.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin52.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin53.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin54.jpg" alt="Photo 7" class="slider-image">
+                            <img src="images/bin55.jpg" alt="Photo 8" class="slider-image">
+                            <img src="images/bin56.jpg" alt="Photo 1" class="slider-image">
+                            <img src="images/bin57.jpg" alt="Photo 2" class="slider-image">
+                            <img src="images/bin58.jpg" alt="Photo 3" class="slider-image">
+                            <img src="images/bin59.jpg" alt="Photo 4" class="slider-image">
+                            <img src="images/bin60.jpg" alt="Photo 5" class="slider-image">
+                            <img src="images/bin61.jpg" alt="Photo 6" class="slider-image">
+                            <img src="images/bin62.jpg" alt="Photo 7" class="slider-image">
+                        </div>
+                    </div>
+                    <div class="slider-dots" id="sliderDots"></div>
+
+                    <p>
+                        <br>
+                        วาเลนไทน์ปีนี้ ของขวัญอาจจะไม่หรูหรา<br>
+                        แต่สัญญาว่าจะรักน้องอ้วนอ้วนให้มากกว่าเมื่อวาน<br>
+                        รักนะครับ...น้องอ้วนอ้วน 🤟
+                    </p>
+
+                    <p class="signature">
+                        รักน้องอ้วนอ้วนมากที่สุด<br>
+                        น้องอ้วนอ้วน 💖 
+                    </p>
+                </div>
+
+                <!-- QR Code แทนหัวใจ -->
+
+                <!-- หมีน่ารัก -->
+                <div class="bears">
+                    <img src="images/Cinnamoroll01.png" alt="Cinnamoroll">
+                </div>
+            </div>
+
+            <!-- ซองด้านล่าง -->
+            <div class="envelope-back"></div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- ปุ่มควบคุมเพลง -->
+    <button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+    <audio id="bgMusic" autoplay>
+        <source src="mp3/Sexski01.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // สร้าง Confetti
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43'];
+            const shapes = ['circle', 'square', 'triangle'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti ' + shapes[Math.floor(Math.random() * shapes.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confettiContainer.appendChild(confetti);
+            }
+        }
+
+        // เริ่ม confetti เมื่อโหลดหน้า
+        window.onload = function() {
+            createConfetti();
+            createFloatingHearts();
+            
+            // เล่นเพลงอัตโนมัติ
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            music.play().then(() => {
+                btn.textContent = '🔊';
+            }).catch(e => {
+                console.log('Autoplay blocked, waiting for user interaction');
+            });
+        };
+
+        // สร้างหัวใจลอย
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-bg');
+            const hearts = ['💙', '🩵', '⭐', '✨', '💙'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        // Image Slider Auto-scroll with Loop
+        function initSlider() {
+            const container = document.getElementById('sliderContainer');
+            const dotsContainer = document.getElementById('sliderDots');
+            const images = container.querySelectorAll('.slider-image');
+            const totalImages = images.length;
+            let currentIndex = 0;
+            let autoScrollTimer = null;
+
+            // สร้าง dots
+            for (let i = 0; i < totalImages; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                container.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateDots();
+            }
+
+            function nextSlide() {
+                if (currentIndex >= totalImages - 1) {
+                    // ถึงรูปสุดท้ายแล้ว: หยุดเลื่อนอัตโนมัติ (ไม่วนลูป)
+                    if (autoScrollTimer) {
+                        clearInterval(autoScrollTimer);
+                        autoScrollTimer = null;
+                    }
+                    return;
+                }
+
+                currentIndex++;
+                goToSlide(currentIndex);
+            }
+
+            // เลื่อนอัตโนมัติทุก 3 วินาที
+            autoScrollTimer = setInterval(nextSlide, 3000);
+        }
+
+        // เรียกใช้ slider
+        window.addEventListener('load', initSlider);
+
+        // เพลงพื้นหลัง - เล่นอัตโนมัติเมื่อคลิกหน้าเว็บ
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        let musicStarted = false;
+
+        // ตรวจจับเมื่อเพลงจบ - redirect ไปหน้า surprise
+        music.addEventListener('ended', function() {
+            // เพลงจบแล้ว redirect ไปหน้า surprise
+            window.location.href = 'surprise.html';
+        });
+
+        // พยายามเล่นอัตโนมัติเมื่อคลิกที่หน้าเว็บ
+        document.addEventListener('click', function startMusic() {
+            if (!musicStarted) {
+                music.play().then(() => {
+                    btn.textContent = '🔊';
+                    musicStarted = true;
+                }).catch(e => console.log('Autoplay blocked'));
+            }
+        }, { once: true });
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                btn.textContent = '🔊';
+            } else {
+                music.pause();
+                btn.textContent = '🎵';
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise! 💙</title>
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#e3f2fd">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #e1f5fe 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* หัวใจตกลงมา */
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            top: -50px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Container หลัก */
+        .surprise-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* กรอบรูปภาพ */
+        .photo-frame {
+            position: relative;
+            display: inline-block;
+            background: white;
+            padding: 15px;
+            padding-bottom: 60px;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(25, 118, 210, 0.3);
+            transform: rotate(-3deg);
+            animation: float 4s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(-3deg) translateY(0); }
+            50% { transform: rotate(-3deg) translateY(-15px); }
+        }
+
+        .photo-frame img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .photo-frame::after {
+            content: '💙 My Girlfriend 💙';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: #1976d2;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* ข้อความพิเศษ */
+        .message-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(25, 118, 210, 0.2);
+            max-width: 450px;
+            margin: 0 auto;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .message-box h1 {
+            color: #1976d2;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(25, 118, 210, 0.2);
+        }
+
+        .message-box p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .message-box .signature {
+            color: #1976d2;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .heart-emoji {
+            font-size: 3rem;
+            display: block;
+            margin-top: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .heart-emoji img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        /* ปุ่มกลับ */
+        .back-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(25, 118, 210, 0.5);
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            animation: sparkle-fade 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes sparkle-fade {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Fireworks */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: firework-explode 1.5s ease-out forwards;
+        }
+
+        @keyframes firework-explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) translateY(100px);
+                opacity: 0;
+            }
+        }
+
+        .firework-trail {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: trail-up 0.8s ease-out forwards;
+        }
+
+        @keyframes trail-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: particle-explode 1.5s ease-out forwards;
+        }
+
+        @keyframes particle-explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive - iPad Gen 9 (810px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .photo-frame {
+                padding: 20px;
+                padding-bottom: 70px;
+            }
+            .photo-frame img {
+                width: 350px;
+                height: 350px;
+            }
+            .photo-frame::after {
+                font-size: 1.2rem;
+                bottom: 20px;
+            }
+            .message-box {
+                padding: 40px 50px;
+                max-width: 550px;
+            }
+            .message-box h1 {
+                font-size: 2.5rem;
+            }
+            .message-box p {
+                font-size: 1.3rem;
+            }
+            .message-box .signature {
+                font-size: 1.4rem;
+            }
+            .heart-emoji {
+                font-size: 4rem;
+            }
+            .back-btn {
+                padding: 18px 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Responsive - iPhone XS Max & iPhone 11 (414px) */
+        @media (min-width: 410px) and (max-width: 420px) {
+            .surprise-container {
+                padding: 15px;
+            }
+            .photo-frame {
+                padding: 12px;
+                padding-bottom: 50px;
+            }
+            .photo-frame img {
+                width: 250px;
+                height: 250px;
+            }
+            .photo-frame::after {
+                font-size: 0.95rem;
+                bottom: 12px;
+            }
+            .message-box {
+                padding: 25px 30px;
+                max-width: 380px;
+            }
+            .message-box h1 {
+                font-size: 1.6rem;
+            }
+            .message-box p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .message-box .signature {
+                font-size: 1.1rem;
+            }
+            .heart-emoji {
+                font-size: 2.5rem;
+            }
+            .back-btn {
+                padding: 12px 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Responsive - iPhone 13 Pro Max (428px) */
+        @media (max-width: 430px) and (min-width: 421px) {
+            .surprise-container {
+                padding: 15px;
+            }
+            .photo-frame img {
+                width: 260px;
+                height: 260px;
+            }
+            .message-box {
+                padding: 25px 35px;
+                max-width: 390px;
+            }
+            .message-box h1 {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* Responsive - iPhone 13 และเล็กกว่า (390px) */
+        @media (max-width: 409px) {
+            .surprise-container {
+                padding: 10px;
+            }
+            .photo-frame {
+                padding: 10px;
+                padding-bottom: 45px;
+            }
+            .photo-frame img {
+                width: 220px;
+                height: 220px;
+            }
+            .photo-frame::after {
+                font-size: 0.85rem;
+                bottom: 10px;
+            }
+            .message-box {
+                padding: 20px 25px;
+                max-width: 340px;
+            }
+            .message-box h1 {
+                font-size: 1.4rem;
+            }
+            .message-box p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            .message-box .signature {
+                font-size: 1rem;
+            }
+            .heart-emoji {
+                font-size: 2rem;
+            }
+            .back-btn {
+                padding: 10px 30px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- หัวใจตกลงมา -->
+    <div class="falling-hearts" id="fallingHearts"></div>
+
+    <!-- Fireworks -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+
+    <!-- เนื้อหาหลัก -->
+    <div class="surprise-container">
+        <!-- กรอบรูป -->
+        <div class="photo-frame">
+            <img src="images/bin62.jpg" alt="Our Special Photo">
+        </div>
+
+        <!-- ข้อความพิเศษ -->
+        <div class="message-box">
+            <h1>ขอบคุณที่อยู่ด้วยกันนะ 💙</h1>
+            <p>
+                ขอบคุณสำหรับทุกวันที่มีความสุข<br>
+                ขอบคุณที่เป็นคนพิเศษในชีวิต<br>
+                รักน้องอ้วนอ้วนมากที่สุดเลย
+            </p>
+            <p class="signature">
+                — จากคนที่รักเธอเสมอ 💙
+            </p>
+            <span class="heart-emoji">
+                <img src="images/Cinnamonroll3.gif" alt="Cinnamonroll">
+            </span>
+        </div>
+
+        <!-- ปุ่มกลับ -->
+        <a href="card.html" class="back-btn">💌 กลับไปอ่านจดหมายอีกครั้ง</a>
+    </div>
+
+    <script>
+        // สร้างหัวใจตกลงมา
+        function createFallingHearts() {
+            const container = document.getElementById('fallingHearts');
+            const hearts = ['💙', '🩵', '💎', '✨', '⭐', '🤍', '💙'];
+            
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        // สร้าง sparkles เมื่อคลิก
+        function createSparkle(x, y) {
+            const sparkles = ['✨', '⭐', '💙', '🌟'];
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.left = (x + (Math.random() - 0.5) * 50) + 'px';
+                sparkle.style.top = (y + (Math.random() - 0.5) * 50) + 'px';
+                sparkle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        }
+
+        // Event listeners
+        window.onload = function() {
+            createFallingHearts();
+            // เริ่มพลุทันที
+            launchFireworks();
+            // พลุต่อเนื่องทุก 2 วินาที
+            setInterval(launchFireworks, 2000);
+        };
+        
+        document.addEventListener('click', function(e) {
+            createSparkle(e.clientX, e.clientY);
+            // ยิงพลุเมื่อคลิก
+            createFirework(e.clientX, e.clientY);
+        });
+
+        // สร้างพลุดอกไม้ไฟ
+        function createFirework(x, y) {
+            const container = document.getElementById('fireworksContainer');
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43', '#81d4fa', '#4fc3f7'];
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.boxShadow = `0 0 6px ${particle.style.backgroundColor}, 0 0 12px ${particle.style.backgroundColor}`;
+
+                const angle = (Math.PI * 2 / particleCount) * i;
+                const velocity = 80 + Math.random() * 80;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                particle.style.animation = 'none';
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${vx}px, ${vy}px) scale(0.3)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 500,
+                    easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
+                });
+
+                container.appendChild(particle);
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+
+        // ยิงพลุอัตโนมัติ
+        function launchFireworks() {
+            const positions = [
+                { x: Math.random() * window.innerWidth * 0.3 + window.innerWidth * 0.1, y: Math.random() * window.innerHeight * 0.3 + 50 },
+                { x: Math.random() * window.innerWidth * 0.3 + window.innerWidth * 0.6, y: Math.random() * window.innerHeight * 0.3 + 50 },
+                { x: Math.random() * window.innerWidth * 0.4 + window.innerWidth * 0.3, y: Math.random() * window.innerHeight * 0.2 + 100 }
+            ];
+
+            positions.forEach((pos, index) => {
+                setTimeout(() => {
+                    createFireworkTrail(pos.x, window.innerHeight, pos.y, () => {
+                        createFirework(pos.x, pos.y);
+                    });
+                }, index * 300);
+            });
+        }
+
+        // สร้างเส้นทางพลุ
+        function createFireworkTrail(startX, startY, endY, callback) {
+            const container = document.getElementById('fireworksContainer');
+            const trail = document.createElement('div');
+            trail.className = 'firework-trail';
+            trail.style.backgroundColor = '#feca57';
+            trail.style.left = startX + 'px';
+            trail.style.top = startY + 'px';
+            trail.style.boxShadow = '0 0 6px #feca57, 0 0 12px #feca57';
+
+            const duration = 800;
+            trail.animate([
+                { transform: 'translateY(0)', opacity: 1 },
+                { transform: `translateY(-${startY - endY}px)`, opacity: 0.5 }
+            ], {
+                duration: duration,
+                easing: 'ease-out'
+            });
+
+            container.appendChild(trail);
+
+            setTimeout(() => {
+                trail.remove();
+                if (callback) callback();
+            }, duration);
+        }
+    </script>
+
+</body>
+</html>

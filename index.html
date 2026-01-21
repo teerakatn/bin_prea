@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You have a letter! 💌</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e3f2fd; /* สีพื้นหลังฟ้าอ่อน */
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* ลิงก์ครอบซองจดหมายเพื่อให้คลิกได้ทั้งก้อน */
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #81d4fa; /* สีตัวซองฟ้าอ่อน */
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ส่วนสามเหลี่ยมด้านบน (ฝาปิดซอง) */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #4fc3f7; /* สีฝาซองฟ้าเข้มกว่าตัวซอง */
+            z-index: 2;
+            transform-origin: top center; /* จุดหมุนอยู่ด้านบน */
+            transition: transform 0.4s ease;
+        }
+
+        /* ฝาซองเปิดเมื่อ hover */
+        .envelope-wrapper:hover .envelope::before {
+            transform: rotateX(40deg); /* เปิดฝาซองขึ้น */
+            z-index: -1; /* ฝาซองไปอยู่ด้านหลังกระดาษ */
+        }
+
+        /* ส่วนสามเหลี่ยมด้านใน (เพื่อให้ดูมีมิติ) */
+        .envelope::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 150px solid #81d4fa;
+            border-right: 150px solid #81d4fa;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid #81d4fa;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 1;
+        }
+
+        /* กระดาษจดหมายในซอง */
+        .letter {
+            position: absolute;
+            width: 260px;
+            height: 160px;
+            background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 100%);
+            border-radius: 5px;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            transition: top 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        /* เส้นบนกระดาษ */
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: repeating-linear-gradient(
+                0deg,
+                #90caf9,
+                #90caf9 2px,
+                transparent 2px,
+                transparent 20px
+            );
+            background-size: 100% 20px;
+            height: 80px;
+        }
+
+        /* หัวใจเล็กบนกระดาษ */
+        .letter-heart {
+            font-size: 30px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter-text {
+            font-size: 12px;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        /* กระดาษโผล่ขึ้นเมื่อ hover */
+        .envelope-wrapper:hover .letter {
+            top: -60px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* สติกเกอร์ Cinnamoroll */
+        .heart-seal {
+            position: absolute;
+            top: 40px; /* ตำแหน่ง */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            transition: transform 0.3s;
+        }
+
+        .heart-seal img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
+
+        .text-hint {
+            margin-top: 30px;
+            text-align: center;
+            color: #0277bd;
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        /* เอฟเฟกต์ตอนเอาเมาส์ไปชี้ */
+        .envelope-wrapper:hover .heart-seal {
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        /* แอนิเมชั่นลอยไปมา */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="card.html">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <!-- กระดาษจดหมาย -->
+                <div class="letter">
+                    <span class="letter-text">น้องอ้วนอ้วน</span>
+                    <span class="letter-heart">💙</span>
+                    
+                </div>
+                <div class="heart-seal">
+                    <img src="images/Cinnamoroll02.gif" alt="Cinnamoroll">
+                </div>
+            </div>
+            <div class="text-hint">คลิกเพื่อเปิดอ่านจดหมาย</div>
+        </div>
+    </a>
+
+</body>
+</html>
