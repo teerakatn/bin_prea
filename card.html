@@ -705,7 +705,60 @@
     <!-- ปุ่มควบคุมเพลง -->
     <button id="musicBtn" onclick="toggleMusic()">🎵</button>
 
-    <audio id="bgMusic" autoplay>
+    <!-- iOS Audio Unlock Overlay -->
+    <div id="audioUnlock" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+    ">
+        <div style="
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 40px 50px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popIn 0.5s ease;
+        ">
+            <div style="font-size: 60px; margin-bottom: 20px;">💙🎵</div>
+            <h2 style="color: #1976d2; margin-bottom: 15px; font-size: 24px;">เปิดเสียงเพลงให้หน่อยนะ</h2>
+            <p style="color: #666; margin-bottom: 25px; font-size: 16px;">กดปุ่มด้านล่างเพื่อเริ่มต้นประสบการณ์พิเศษ 💕</p>
+            <button id="unlockAudioBtn" style="
+                background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+                color: white;
+                border: none;
+                padding: 15px 50px;
+                font-size: 20px;
+                border-radius: 50px;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(79, 195, 247, 0.4);
+                transition: all 0.3s ease;
+                font-family: 'Sarabun', sans-serif;
+            ">🎶 เปิดเพลง</button>
+        </div>
+    </div>
+    <style>
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        #unlockAudioBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(79, 195, 247, 0.5);
+        }
+        #unlockAudioBtn:active {
+            transform: scale(0.98);
+        }
+    </style>
+
+    <audio id="bgMusic" preload="auto" playsinline>
         <source src="mp3/Sexski01.mp3" type="audio/mpeg">
     </audio>
 
@@ -810,10 +863,51 @@
         // เรียกใช้ slider
         window.addEventListener('load', initSlider);
 
-        // เพลงพื้นหลัง - เล่นอัตโนมัติเมื่อคลิกหน้าเว็บ
+        // เพลงพื้นหลัง
         const music = document.getElementById('bgMusic');
         const btn = document.getElementById('musicBtn');
+        const audioUnlock = document.getElementById('audioUnlock');
+        const unlockBtn = document.getElementById('unlockAudioBtn');
         let musicStarted = false;
+
+        // ตรวจสอบว่าเป็น iOS หรือไม่
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        }
+
+        // ฟังก์ชันเริ่มเล่นเพลง
+        function startMusicPlayback() {
+            music.play().then(() => {
+                btn.textContent = '🔊';
+                musicStarted = true;
+                audioUnlock.style.display = 'none';
+            }).catch(e => {
+                console.log('Play failed:', e);
+                // แสดง popup ให้กด
+                audioUnlock.style.display = 'flex';
+            });
+        }
+
+        // เมื่อโหลดหน้าเว็บ
+        window.addEventListener('load', function() {
+            // ลองเล่นอัตโนมัติก่อน
+            startMusicPlayback();
+            
+            // ถ้าเป็น iOS แสดง popup ทันที
+            if (isIOS()) {
+                audioUnlock.style.display = 'flex';
+            }
+        });
+
+        // ปุ่ม unlock สำหรับ iOS
+        unlockBtn.addEventListener('click', function() {
+            music.play().then(() => {
+                btn.textContent = '🔊';
+                musicStarted = true;
+                audioUnlock.style.display = 'none';
+            }).catch(e => console.log('Error:', e));
+        });
 
         // ตรวจจับเมื่อเพลงจบ - redirect ไปหน้า surprise
         music.addEventListener('ended', function() {
@@ -821,13 +915,25 @@
             window.location.href = 'surprise.html';
         });
 
-        // พยายามเล่นอัตโนมัติเมื่อคลิกที่หน้าเว็บ
-        document.addEventListener('click', function startMusic() {
+        // พยายามเล่นอัตโนมัติเมื่อคลิกที่หน้าเว็บ (สำหรับ browser อื่นๆ)
+        document.addEventListener('click', function startMusic(e) {
+            if (!musicStarted && e.target !== unlockBtn) {
+                music.play().then(() => {
+                    btn.textContent = '🔊';
+                    musicStarted = true;
+                    audioUnlock.style.display = 'none';
+                }).catch(e => console.log('Autoplay blocked'));
+            }
+        });
+
+        // แตะหน้าจอ (touch) สำหรับมือถือ
+        document.addEventListener('touchstart', function() {
             if (!musicStarted) {
                 music.play().then(() => {
                     btn.textContent = '🔊';
                     musicStarted = true;
-                }).catch(e => console.log('Autoplay blocked'));
+                    audioUnlock.style.display = 'none';
+                }).catch(e => {});
             }
         }, { once: true });
 
